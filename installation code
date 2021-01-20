@@ -1,0 +1,87 @@
+1) yum -y update
+
+
+2) java –version
+
+    yum install java-1.8.0-open.jdk -y
+
+
+3) update-alternatives –config java
+
+
+4) vi /etc/profile
+
+type i for inserting
+
+ copy past this 
+
+ #JAVA_HOME
+export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64/
+export PATH=$JAVA_HOME/bin:$PATH
+
+export CONFLUENT_HOME=/root/confluent-6.0.1/
+export PATH=$PATH:$CONFLUENT_HOME/bin
+
+esc -> :wq
+
+
+
+5) curl -O http://packages.confluent.io/archive/6.0/confluent-6.0.1.tar.gz
+
+
+
+6) tar xzf confluent-6.0.1.tar.gz
+
+ls 
+
+
+7) cd confluent-6.0.1
+
+//check the etc and bin 
+under confluent-6.0.1 
+type ls
+
+cd bin
+
+
+8) cd etc 
+
+ls
+
+//inside etc
+
+
+9) cd kafka
+
+//edit server.properties
+
+
+10) vi server.properties
+
+i=insert
+
+listeners=PLAINTEXT://0.0.0.0:9092
+
+advertised.listeners=PLAINTEXT://10.20.0.86:9092
+
+listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+
+Esc -> :wq
+
+
+
+11) Manual running of zookeeper and kafka 
+
+./zookeeper-server-start  /root/confluent-6.0.1/etc/kafka/zookeeper.properties
+
+./kafka-server-start  /root/confluent-6.0.1/etc/kafka/server.properties
+
+(or)
+
+
+
+12) //run the confluent
+
+confluent local services start
+
+//confluent local services start - do it 7 times untill all the 7 components are up
